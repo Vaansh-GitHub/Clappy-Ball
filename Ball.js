@@ -1,5 +1,6 @@
 class Ball{
     gravity=6;
+    lift=100;
     constructor(x,y,d)
     {
         this.x=x;
@@ -23,7 +24,7 @@ class Ball{
     {
            if(!(this.y<0))
            {
-            this.y-=100;
+             this.y-=this.lift;
            }
     }
 }
