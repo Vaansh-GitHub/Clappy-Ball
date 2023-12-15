@@ -1,14 +1,16 @@
 let mic;
 let ball;
+let but;
 let pipes=[];
 let sliderTop,sliderBottom;
 let clapping=false;
 function setup() {
 	createCanvas(500,600);
-	ball=new Ball(50,height/2,20,width,height);
-	pipes.push(new Pipe(width,height));
+	but=createButton("To Start Taking Audio");
 	mic=new p5.AudioIn();
 	mic.start();
+	ball=new Ball(50,height/2,20,width,height);
+	pipes.push(new Pipe(width,height));
 	sliderTop=createSlider(0,1,0.3,0.01);
 	sliderBottom=createSlider(0,1,0.1,0.01);
 }
@@ -18,6 +20,7 @@ function draw() {
     ball.show();
 	ball.fallDown();
     let vol= mic.getLevel();
+
 	if(frameCount%100==0)
 	{
 		pipes.push(new Pipe(width,height));
@@ -47,6 +50,7 @@ function draw() {
 	{
 		clapping = false;
 	}
+
 	fill(0,255,0)
 	let y=map(vol,0,1,height,0);
 	rect(width-50,y,50,height-y);
@@ -60,6 +64,7 @@ function draw() {
 	stroke(0,0,255);
     strokeWeight(4);
 	line(width-50,by,width,by);
+
 }	
 function keyPressed()
 {
