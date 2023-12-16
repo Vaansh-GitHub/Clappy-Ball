@@ -1,26 +1,28 @@
 class Pipe{
     constructor(w,h)
     {
+        this.spacing=100;
+        this.space_center=random(50,h-50);
         this.screenWidth=w;
         this.screenHeight=h;
-        this.top=random(this.screenHeight/4,this.screenHeight/2-25);
-        this.bottom=random(this.screenHeight/4,this.screenHeight/2-25);
+        this.top=this.space_center-this.spacing/2;//to store the top pipes height
+        this.bottom=h-this.space_center-this.spacing/2;//to store the bottom pipes height
         this.x=this.screenWidth;//starting x-coordinates of pipes changes as game proceeds
         this.speed=2;//Speed of pipe movements
-        this.width=20;// Width of Pipes
+        this.width=40;// Width of Pipes
         this.hitted=false;//Boolean value to check whether a ball hits a pipe or not
+        this.passes=false;
     }
-    constructPipes(){
+    constructPipes(ball){
         noStroke();
         fill(255);
         if(this.hitted)
         {
             fill(255,0,0);
         }
-        if(this.x<50 && !this.hitted)
+        if(this.x<ball.x && !this.hitted)
         {
-            fill(0,255,0)
-
+            fill(0,255,0);
         }
         noStroke();
         rect(this.x,0,this.width,this.top);
@@ -39,9 +41,9 @@ class Pipe{
     }
     hits(ball)//function to check whether a pipe is hit by the ball
     {
-        if(ball.y<this.top||ball.y>this.screenHeight-this.bottom)
+        if(ball.y<this.top||ball.y>this.screenHeight-this.bottom )
         {
-            if(ball.x>this.x && ball.x<this.x+this.width)
+            if(ball.x>this.x && ball.x<this.x+this.width && !this.hitted)
             {
                 this.hitted=true;
                 return true;
@@ -49,6 +51,23 @@ class Pipe{
         }
         else{
            return false;
+        }
+    }
+    crosses(ball)
+    {
+        if(ball.y>this.top && ball.y<this.screenHeight-this.bottom)
+        {
+            if(this.x<ball.x && !this.hitted && !this.passes )
+            {
+                this.passes=true;
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
         }
     }
 }

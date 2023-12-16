@@ -1,5 +1,5 @@
 class Ball{
-    gravity=0.4;//downward force on the ball
+    gravity=0;//downward force on the ball
     speed=0;//speed of the ball
     lift=-10;//upward force on the ball
     constructor(x,y,d,w,h)
@@ -9,6 +9,7 @@ class Ball{
         this.d=d;//diameter of the ball
         this.screenWidth=w;
         this.screenHeight=h;
+        this.score=0;
     }
     show()
     {
@@ -25,12 +26,18 @@ class Ball{
         {
             this.y=height;
             this.speed=0;
+            this.gravity=0;
+            this.speed=0;
+            this.lift=0;
+            return false;
         }
         if(this.y<0)
         {
             this.y=0;
             this.speed=0;
+            return true;
         }
+        return true;
     }
     moveUp()//Function to make the ball move up each time using any of the interactive features available
     {
