@@ -3,13 +3,15 @@ let ball;
 let pipes=[];
 let sliderTop,sliderBottom;
 let clapping=false;
-let back,topPipe,bottomPipe,bird1,bird2,bird3;
+let back,topPipe,bottomPipe,bird1;
 let score,message;
 let pipe_creation=false,hitted=false,pipe_speed=2;
 function preload()
 {
     back=loadImage("Images/background.png");
 	bird1=loadImage("Images/bird1.png");
+	bottomPipe=loadImage("Images/pipe1.png");
+	topPipe=loadImage("Images/pipe2.jpg");
 }
 
 function setup() {
@@ -44,13 +46,13 @@ function draw() {
 	}
 	if(pipe_creation)
 	{
-		if(frameCount%100==0)
+		if(frameCount%150==0)
 		{
 			pipes.push(new Pipe(width,height,pipe_speed));
 		}
 		for(let i=pipes.length-1;i>0;i--)
 		{
-			pipes[i].constructPipes(ball);
+			pipes[i].constructPipes(ball,topPipe,bottomPipe);
 			pipes[i].movePipes();
 			if(pipes[i].hits(ball))
 			{
@@ -73,9 +75,9 @@ function draw() {
 			{
 				ball.score+=1;
 				score.html("Score = "+ball.score);
-				if(ball.score%5==0)
+				if(ball.score%10==0)
 				{
-					pipe_speed+=0.5;
+					pipe_speed+=1;
 					pipes=[];
 					pipes.push(new Pipe(width,height,pipe_speed));
 					message.html("Next Wave ! !");

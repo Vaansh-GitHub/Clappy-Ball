@@ -14,10 +14,10 @@ class Ball{
     }
     show(bird)
     {
-        noStroke();
-        stroke(255);
+        stroke(0);
+        strokeWeight(4);
         fill(255);
-        image(bird,this.x,this.y,this.d,this.d);
+        image(bird,this.x,this.y,this.d+10,this.d);
     }
     fallDown()//Function to make the ball falldown each time
     {

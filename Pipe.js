@@ -1,7 +1,7 @@
 class Pipe{
     constructor(w,h,speed)
     {
-        this.spacing=150;
+        this.spacing=120;
         this.space_center=random(50,h-50);
         this.screenWidth=w;
         this.screenHeight=h;
@@ -9,11 +9,11 @@ class Pipe{
         this.bottom=h-this.space_center-this.spacing/2;//to store the bottom pipes height
         this.x=this.screenWidth;//starting x-coordinates of pipes changes as game proceeds
         this.speed=speed;//Speed of pipe movements
-        this.width=20;// Width of Pipes
+        this.width=60;// Width of Pipes
         this.hitted=false;//Boolean value to check whether a ball hits a pipe or not
         this.passes=false;
     }
-    constructPipes(ball){
+    constructPipes(ball,topPipe,bottomPipe){
         noStroke();
         fill(255);
         if(this.hitted)
@@ -25,8 +25,8 @@ class Pipe{
             fill(0,255,0);
         }
         noStroke();
-        rect(this.x,0,this.width,this.top);
-        rect(this.x,this.screenHeight-this.bottom,this.width,this.bottom);
+        image(topPipe,this.x,0,this.width,this.top);
+        image(bottomPipe,this.x,this.screenHeight-this.bottom,this.width,this.bottom);
     }
     movePipes(){
         this.x-=this.speed;
