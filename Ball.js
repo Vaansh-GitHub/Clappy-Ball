@@ -1,3 +1,4 @@
+
 class Ball{
     gravity=0;//downward force on the ball
     speed=0;//speed of the ball
@@ -11,12 +12,12 @@ class Ball{
         this.screenHeight=h;
         this.score=0;
     }
-    show()
+    show(bird)
     {
         noStroke();
         stroke(255);
         fill(255);
-        ellipse(this.x,this.y,this.d);
+        image(bird,this.x,this.y,this.d,this.d);
     }
     fallDown()//Function to make the ball falldown each time
     {

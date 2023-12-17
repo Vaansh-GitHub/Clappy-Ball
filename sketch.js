@@ -3,33 +3,34 @@ let ball;
 let pipes=[];
 let sliderTop,sliderBottom;
 let clapping=false;
-let back,topPipe,bottomPipe,bird;
-let score,lost;
-let pipe_creation=false,hitted=false;
+let back,topPipe,bottomPipe,bird1,bird2,bird3;
+let score,message;
+let pipe_creation=false,hitted=false,pipe_speed=2;
 function preload()
 {
     back=loadImage("Images/background.png");
+	bird1=loadImage("Images/bird1.png");
 }
 
 function setup() {
 	createCanvas(500,600);
 	mic=new p5.AudioIn();
 	mic.start();
-	ball=new Ball(width/2,height/2,20,width,height);
-	pipes.push(new Pipe(width,height));
+	ball=new Ball(width/2,height/2,30,width,height);
+	pipes.push(new Pipe(width,height,pipe_speed));
 	sliderTop=createSlider(0,1,0.3,0.01);
 	sliderBottom=createSlider(0,1,0.1,0.01);
 	score=createP("Score = 0");
-	lost=createP("");
-	lost.position(width+100,height/2+50);
-	lost.style("font-size","30px");
+	message=createP("");
+	message.position(width+100,height/2+50);
+	message.style("font-size","30px");
 	score.position(width+100,height/2);
 	score.style("font-size","30px");
 }
 
 function draw() {
 	background(back);
-    ball.show();
+	ball.show(bird1);
 	ball.fallDown();
     let vol= mic.getLevel();
 
@@ -38,14 +39,14 @@ function draw() {
 		pipe_creation=false;
 		pipe_creation=false;
 		hitted=true;
-        lost.html("You Lost ! Better Luck Next Time");
+        message.html("You Lost ! Better Luck Next Time");
 		score.html("Final Score = "+ball.score);
 	}
 	if(pipe_creation)
 	{
 		if(frameCount%100==0)
 		{
-			pipes.push(new Pipe(width,height));
+			pipes.push(new Pipe(width,height,pipe_speed));
 		}
 		for(let i=pipes.length-1;i>0;i--)
 		{
@@ -56,7 +57,7 @@ function draw() {
 				console.log("HIT");
 				pipe_creation=false;
 				hitted=true;
-                lost.html("You Lost ! Better Luck Next Time");
+                message.html("You Lost ! Better Luck Next Time");
 				score.html("Final Score = "+ball.score);
 				if(pipes[i].passes)
 				{
@@ -72,6 +73,17 @@ function draw() {
 			{
 				ball.score+=1;
 				score.html("Score = "+ball.score);
+				if(ball.score%5==0)
+				{
+					pipe_speed+=0.5;
+					pipes=[];
+					pipes.push(new Pipe(width,height,pipe_speed));
+					message.html("Next Wave ! !");
+					setTimeout(()=>{
+                         message.html("");
+					},2000);
+					break;
+				}
 			}
 		}
 	
