@@ -4,7 +4,7 @@ let pipes=[];
 let sliderTop,sliderBottom;
 let clapping=false;
 let back,topPipe,bottomPipe,bird1;
-let score,message;
+let score,message,inst;
 let pipe_creation=false,hitted=false,pipe_speed=2;
 function preload()
 {
@@ -77,7 +77,7 @@ function draw() {
 				score.html("Score = "+ball.score);
 				if(ball.score%10==0)
 				{
-					pipe_speed+=1;
+					pipe_speed+=1.5;
 					pipes=[];
 					pipes.push(new Pipe(width,height,pipe_speed));
 					message.html("Next Wave ! !");

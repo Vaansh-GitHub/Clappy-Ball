@@ -1,0 +1,22 @@
+#instruction{
+    display:grid;
+    grid-template-columns: 400px;
+    position: fixed;
+    top:150px;
+    right:50px;
+    background-color: rgb(255, 196, 0);
+    box-shadow: 2px 2px 2px 2px;
+}
+ul{
+    list-style-type: none ;
+}
+li{
+    font-size:20px;
+    padding:10px;
+    font-family:'Courier New', Courier, monospace;
+}
+h1{
+    font-size: 40px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color:brown;
+}
